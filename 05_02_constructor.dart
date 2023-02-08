@@ -2,7 +2,7 @@ class Player {
   final String name;
   int xp;
 
-  Player(this.name, this.xp); // constructor 잘 활용하는 방법
+  Player(this.name, this.xp); // normal dart constructor
 
   // * 기본
   // late final String name; // constructor로 클래스 변수에 값을 주려면 late를 써야한다.
