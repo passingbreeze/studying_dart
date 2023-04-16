@@ -7,7 +7,7 @@ void main() {
 }
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({super.key}); // widget's identifier
 
   // flutter codes are composition of Widgets
   // start point of entire app
