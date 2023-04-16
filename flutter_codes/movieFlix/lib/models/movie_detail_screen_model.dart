@@ -1,29 +1,51 @@
+const String imgURL = "https://image.tmdb.org/t/p/w500/";
+
 class Genres {
-  final int id;
   final String name;
+  final int id;
 
   Genres.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        name = json['name'];
+      : id = json['id'] as int,
+        name = json['name'] as String;
 }
 
 class MovieDetailModel {
-  final bool isAdult;
   final String posterPath;
   final List<Genres> genres;
   final String title;
   final String overView;
-  final double runTime;
+  final int runTime;
   final double voteAvg;
   final int voteCnt;
 
-  MovieDetailModel.fromJson(Map<String, dynamic> json)
-      : isAdult = json['adult'],
-        posterPath = json['poster_path'],
-        genres = json['genre_ids'],
-        title = json['title'],
-        overView = json['overview'],
-        runTime = json['runtime'],
-        voteAvg = json['vote_average'],
-        voteCnt = json['vote_count'];
+  MovieDetailModel({
+    required this.posterPath,
+    required this.genres,
+    required this.title,
+    required this.overView,
+    required this.runTime,
+    required this.voteAvg,
+    required this.voteCnt,
+  });
+
+  factory MovieDetailModel.fromJson(Map<String, dynamic> json) {
+    List<Genres> genreList = [];
+    for (var g in json['genres']) {
+      genreList.add(Genres.fromJson(g));
+    }
+
+    return MovieDetailModel(
+      posterPath: imgURL + json['poster_path'],
+      genres: genreList,
+      title: json['title'] as String,
+      overView: json['overview'] as String,
+      runTime: json['runtime'] as int,
+      voteAvg: json['vote_average'] as double,
+      voteCnt: json['vote_count'] as int,
+    );
+  }
+
+  String getPosterPath() {
+    return posterPath;
+  }
 }
